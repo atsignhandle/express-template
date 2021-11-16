@@ -1,0 +1,24 @@
+version: '3.7'
+
+services:
+  omnibus-keyserver:
+    build:
+      context: ./
+      target: production-build-stage
+      dockerfile: Dockerfile
+    container_name: keyserver
+    ports:
+      - '3000:3000'
+    env_file:
+      - .env
+    volumes:
+      - ./:/app
+    command: bash -c "yarn typeorm migration:run && yarn prod"
+    restart: 'always'
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
+
