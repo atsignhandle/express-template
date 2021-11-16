@@ -1,12 +1,12 @@
 version: '3.7'
 
 services:
-  omnibus-keyserver:
+  express:
     build:
       context: ./
       target: production-build-stage
       dockerfile: Dockerfile
-    container_name: keyserver
+    container_name: express
     ports:
       - '3000:3000'
     env_file:
@@ -21,4 +21,3 @@ services:
 networks:
   backend:
     driver: bridge
-
